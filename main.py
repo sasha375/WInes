@@ -1,11 +1,9 @@
-from http.server import HTTPServer, SimpleHTTPRequestHandler
-import datetime
-from math import floor
-
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-import pandas
-from pprint import pprint
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 from collections import defaultdict
+from math import floor
+import datetime
+import pandas
 
 wines = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
 final_wines = defaultdict(list)
@@ -19,7 +17,7 @@ final_wines = dict(final_wines)
 
 categories = []
 for cat, wines in final_wines.items():
-    categories.append({"name":cat, "wines":wines})
+    categories.append({"name": cat, "wines": wines})
 
 
 env = Environment(
