@@ -1,27 +1,26 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import datetime
 from math import floor
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import pandas
 from pprint import pprint
 from collections import defaultdict
 
-wines = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
-d = defaultdict(list)
-for v in wines:
-    v2 = v.copy()
-    del v2["Категория"]
+wines = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
+final_wines = defaultdict(list)
+for wine in wines:
+    wine_without_cat = wine.copy()
+    del wine_without_cat["Категория"]
 
-    d[v["Категория"]].append(v2)
+    final_wines[wine["Категория"]].append(wine_without_cat)
 
-d = dict(d)
+final_wines = dict(final_wines)
+
 categories = []
-for k, v in d.items():
-    categories.append({"name":k, "wines":v})
+for cat, wines in final_wines.items():
+    categories.append({"name":cat, "wines":wines})
 
-
-
-pprint(d)
 
 env = Environment(
     loader=FileSystemLoader('.'),
