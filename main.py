@@ -1,22 +1,23 @@
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-from http.server import HTTPServer, SimpleHTTPRequestHandler
-from collections import defaultdict
-from math import floor
 import datetime
+from math import floor
 import pandas
 
+from collections import defaultdict
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+
 wines = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
-final_wines = defaultdict(list)
+drinks = defaultdict(list)
 for wine in wines:
     wine_without_cat = wine.copy()
     del wine_without_cat["Категория"]
 
-    final_wines[wine["Категория"]].append(wine_without_cat)
+    drinks[wine["Категория"]].append(wine_without_cat)
 
-final_wines = dict(final_wines)
+drinks = dict(drinks)
 
 categories = []
-for cat, wines in final_wines.items():
+for cat, wines in drinks.items():
     categories.append({"name": cat, "wines": wines})
 
 
