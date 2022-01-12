@@ -1,3 +1,4 @@
+import collections
 import datetime
 from math import floor
 import pandas
@@ -7,17 +8,14 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 wines = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
-drinks = defaultdict(list)
-for wine in wines:
-    wine_without_cat = wine.copy()
-    del wine_without_cat["Категория"]
 
-    drinks[wine["Категория"]].append(wine_without_cat)
+grouped_drinks = collections.defaultdict(list)
 
-drinks = dict(drinks)
+for drink in wines:
+    grouped_drinks[drink['Категория']].append(drink)
 
 categories = []
-for cat, wines in drinks.items():
+for cat, wines in grouped_drinks.items():
     categories.append({"name": cat, "wines": wines})
 
 
