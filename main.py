@@ -9,14 +9,16 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 wines = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
 
+run_year = 1920
+
 grouped_drinks = collections.defaultdict(list)
 
 for drink in wines:
     grouped_drinks[drink['Категория']].append(drink)
 
-categories = []
+production = []
 for cat, wines in grouped_drinks.items():
-    categories.append({"name": cat, "wines": wines})
+    production.append({"name": cat, "wines": wines})
 
 
 env = Environment(
@@ -28,8 +30,8 @@ template = env.get_template('template.html')
 
 
 rendered_page = template.render(
-    lifetime=floor((datetime.datetime.now().date() - datetime.date(1920, 1, 1)).total_seconds() / (3600 * 24 * 360)),
-    categories=categories
+    lifetime=round(datetime.datetime.now().year - run_year),
+    categories=production
 )
 
 with open('index.html', 'w', encoding="utf8") as file:
