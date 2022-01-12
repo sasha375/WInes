@@ -1,9 +1,7 @@
 import collections
 import datetime
-from math import floor
 import pandas
 
-from collections import defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
