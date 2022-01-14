@@ -1,11 +1,44 @@
 import collections
 import datetime
 import pandas
+import sys
+import os
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-wines = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
+p = False
+s = False
+
+if len(sys.argv) >= 2:
+    if sys.argv[1] != "!inherit":
+        path = sys.argv[1]
+        p = True
+    if len(sys.argv) >= 3:
+        if sys.argv[2] != "!inherit":
+            sheet_name = sys.argv[2]
+            s = True
+
+if (not p) or (not s):
+    if os.path.exists("config.py"):
+        import config
+        if not p:
+            path = config.production_path
+        if not s:
+            sheet_name = config.sheet_name
+    else:
+        raise FileNotFoundError("""
+please specify production path or write it to config.py
+Usage:
+    python main.py [path_to_production [sheet_name]]
+config.py syntax:
+    production_path = "path/to/production.xlsx"
+    sheet_name = "Sheetname"
+""")
+
+
+
+wines = pandas.read_excel(path, sheet_name=sheet_name, na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
 
 run_year = 1920
 
