@@ -30,7 +30,8 @@ if (not p) or (not s):
         raise FileNotFoundError("""
 please specify production path or write it to config.py
 Usage:
-    python main.py [path_to_production [sheet_name]]
+    python main.py [path_to_production|!inherit [sheet_name|!inherit]]
+    (!inherit = from config.py)
 config.py syntax:
     production_path = "path/to/production.xlsx"
     sheet_name = "Sheetname"
