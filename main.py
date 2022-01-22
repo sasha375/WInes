@@ -7,24 +7,24 @@ import os
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-p = False
-s = False
+path_in_console = False
+sheet_name_in_path = False
 
 if len(sys.argv) >= 2:
     if sys.argv[1] != "!inherit":
         path = sys.argv[1]
-        p = True
+        path_in_console = True
     if len(sys.argv) >= 3:
         if sys.argv[2] != "!inherit":
             sheet_name = sys.argv[2]
-            s = True
+            sheet_name_in_path = True
 
-if (not p) or (not s):
+if (not path_in_console) or (not sheet_name_in_path):
     if os.path.exists("config.py"):
         import config
-        if not p:
+        if not path_in_console:
             path = config.production_path
-        if not s:
+        if not sheet_name_in_path:
             sheet_name = config.sheet_name
     else:
         raise FileNotFoundError("""
