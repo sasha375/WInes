@@ -113,30 +113,30 @@
             </p>
           </div>
         </div>
-        {% for category in categories %}
-        <h1>{{category.name}}</h1>
-        <div class="row">
-          {% for wine in category.wines %}
-            <div class="col-lg-4 mb-5 col-md-6">
-              <div class="wine_v_1 text-center pb-4 pt-5">
-                <img src="images/{{wine.Картинка}}" alt="Image" class="img-fluid">
-                <div>
-                  <h3 class="heading mt-3 mb-3 text-dark">{{wine.Название}}</h3>
-                  <p>
-                    {% if wine.Сорт %}
-                    Сорт винограда - {{wine.Сорт}}<br/>
-                    {% endif %}
-                    <span class="price">{{wine.Цена}} р.</span>
-                    {% if wine.Акция=="Выгодное предложение" %}
-                    <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-                    {% endif %}
-                  </p>
+          {% for category in categories %}
+            <h1>{{category.name}}</h1>
+            <div class="row">
+              {% for wine in category.wines %}
+                <div class="col-lg-4 mb-5 col-md-6">
+                  <div class="wine_v_1 text-center pb-4 pt-5">
+                    <img src="images/{{wine.Картинка}}" alt="Image" class="img-fluid">
+                    <div>
+                      <h3 class="heading mt-3 mb-3 text-dark">{{wine.Название}}</h3>
+                      <p>
+                        {% if wine.Сорт %}
+                          Сорт винограда - {{wine.Сорт}}<br/>
+                        {% endif %}
+                        <span class="price">{{wine.Цена}} р.</span>
+                        {% if wine.Акция=="Выгодное предложение" %}
+                          <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
+                        {% endif %}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              {% endfor %}
             </div>
           {% endfor %}
-        </div>
-        {% endfor %}
       </div>
     </div>
 
