@@ -8,12 +8,34 @@ import os
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+error = False
+__doc__ = '''
+Usage:
+  python main.py [--production-path PRODUCTION_PATH] [--sheet-name SHEET_NAME]
+(If param is not specified it will be given from Environment)
+'''
+
 parser = argparse.ArgumentParser(description='Описание что делает программа')
 parser.add_argument('--production-path', default=os.getenv("PRODUCTION_PATH"))
 parser.add_argument('--sheet-name', default=os.getenv("SHEET_NAME"))
 args = parser.parse_args()
 
+if args.production_path is None:
+    print("Error: production path does not specified")
+    error = True
 
+if args.sheet_name is None:
+    print("Error: sheet name does not specified")
+    error = True
+
+if args.production_path is not None:
+    if not os.path.exists(args.production_path):
+        print("FileNotFoundError: file " + args.production_path + " does not exists")
+        error = True
+
+if error:
+    print(__doc__)
+    exit(1)
 
 wines = pandas.read_excel(args.production_path, sheet_name=args.sheet_name, na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
 
