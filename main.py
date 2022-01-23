@@ -60,7 +60,7 @@ template = env.get_template('template.html')
 
 
 rendered_page = template.render(
-    lifetime=round(datetime.datetime.now().year - creation_year),
+    lifetime=datetime.datetime.now().year - creation_year,
     categories=production
 )
 
