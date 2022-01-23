@@ -39,7 +39,7 @@ if error:
 
 wines = pandas.read_excel(args.production_path, sheet_name=args.sheet_name, na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
 
-run_year = 1920
+creation_year = 1920
 
 grouped_drinks = collections.defaultdict(list)
 
@@ -60,7 +60,7 @@ template = env.get_template('template.html')
 
 
 rendered_page = template.render(
-    lifetime=round(datetime.datetime.now().year - run_year),
+    lifetime=round(datetime.datetime.now().year - creation_year),
     categories=production
 )
 
