@@ -16,8 +16,8 @@ python3 main.py
 Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
 
 ## Окружение
-PRODUCTION_PATH=wines.xlsx
-SHEET_NAME=Sheet1
+- PRODUCTION_PATH=wines.xlsx
+- SHEET_NAME=Sheet1
 
 ## Дополнительно
 Пример файла продукции (wine.xlsx)
