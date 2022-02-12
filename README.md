@@ -9,6 +9,10 @@
 ```
 python3 main.py
 ```
+или
+```
+python3 main.py --production-path wines.xlsx --sheet-name Sheet1
+```
 - Перейдите на сайт по адресу [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ## Цели проекта
