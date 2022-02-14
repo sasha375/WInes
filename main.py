@@ -1,23 +1,17 @@
 import collections
 import datetime
-import pandas
 import sys
-import argparse
 import os
+
+import argparse
+import pandas
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-error = False
-__doc__ = '''
-Usage:
-  python main.py [--production-path PRODUCTION_PATH] [--sheet-name SHEET_NAME]
-(If param is not specified it will be given from Environment)
-'''
-
 parser = argparse.ArgumentParser(description='Описание что делает программа')
-parser.add_argument('--production-path', default=os.getenv("PRODUCTION_PATH"))
-parser.add_argument('--sheet-name', default=os.getenv("SHEET_NAME"))
+parser.add_argument('--production-path', default=os.getenv("PRODUCTION_PATH"), help="path to xlsx file (If param is not specified it will be given from Environment)")
+parser.add_argument('--sheet-name', default=os.getenv("SHEET_NAME"), help="sheet name in <--production-path> (If param is not specified it will be given from Environment)")
 args = parser.parse_args()
 
 wines = pandas.read_excel(args.production_path, sheet_name=args.sheet_name, na_values='', keep_default_na=False).fillna('').to_dict(orient='record')
