@@ -19,9 +19,11 @@ python3 main.py --production-path wines.xlsx --sheet-name Sheet1
 
 Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
 
-## Окружение
-- PRODUCTION_PATH=wines.xlsx
-- SHEET_NAME=Sheet1
+## .env файл
+```
+PRODUCTION_PATH=wines.xlsx
+SHEET_NAME=Sheet1
+```
 
 ## Дополнительно
 Пример файла продукции (wine.xlsx)
