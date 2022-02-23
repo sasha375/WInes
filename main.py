@@ -2,11 +2,11 @@ import collections
 import datetime
 import sys
 import os
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 import argparse
 import pandas
 
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
@@ -40,7 +40,7 @@ def main():
     
     rendered_page = template.render(
         lifetime=datetime.datetime.now().year - creation_year,
-        categories=production
+        production=production
     )
         with open('index.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)

@@ -113,7 +113,7 @@
             </p>
           </div>
         </div>
-          {% for category, product_cards in products %}
+          {% for category, product_cards in production %}
             <h1>{{category}}</h1>
             <div class="row">
               {% for wine in product_cards %}
@@ -127,7 +127,7 @@
                           Сорт винограда - {{wine.Сорт}}<br/>
                         {% endif %}
                         <span class="price">{{wine.Цена}} р.</span>
-                        {% if wine.Акция=="Выгодное предложение" %}
+                        {% if wine.Акция!="" %}
                           <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
                         {% endif %}
                       </p>
